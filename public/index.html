@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trending Topics</title>
+    <script>
+        async function runScript() {
+            document.getElementById('result').innerText = 'Running script, please wait...';
+
+            const response = await fetch('/run-script');
+            const data = await response.json();
+
+            const resultDiv = document.getElementById('result');
+            resultDiv.innerHTML = `
+                <p>These are the most happening topics as on ${new Date(data.dateTime).toLocaleString()}:</p>
+                <ol>
+                    ${data.topics.map(topic => `<li>${topic}</li>`).join('')}
+                </ol>
+                <p>The IP address used for this query was ${data.ipAddress}.</p>
+                <p>Here's a JSON extract of this record from the MongoDB:</p>
+                <pre>${JSON.stringify(data.mongoRecord, null, 2)}</pre>
+                <p><a href="javascript:void(0);" onclick="runScript()">Click here to run the query again.</a></p>
+            `;
+        }
+    </script>
+</head>
+<body>
+    <h1>Trending Topics</h1>
+    <button onclick="runScript()">Click here to run the script</button>
+    <div id="result"></div>
+</body>
+</html>
