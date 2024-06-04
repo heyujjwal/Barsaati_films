@@ -46,9 +46,9 @@ Click the "Click here to run the script" button under the Trending Topic to run 
 
 
 ##Example Configuration
-Update/Create the .env file with your credentials:
+Update/Create the `.env` file with your credentials:
 
-
+```javascript
 MONGO_URI=mongodb://localhost:27017   (Local Mongodb Database)
 MONGO_DB_NAME=<your_database_name>
 MONGO_COLLECTION_NAME=your_collection_name>
